@@ -32,6 +32,33 @@ A comprehensive command-line interface for Linear's API, built with agents in mi
 - 📚 **Built-in Documentation**: Access full documentation with `linctl docs`
 - 🧪 **Smoke Testing**: Automated smoke tests for all read-only commands
 
+## 🆕 What's New
+
+Recent additions based on the last development cycle:
+
+### Parent Issue Linking
+- **Create sub-issues**: `linctl issue create --title "Task" --team ENG --parent RAE-123`
+- **Update parent relationships**: `linctl issue update LIN-456 --parent RAE-123` (or `--parent unassigned` to remove)
+- **Filter by parent**: `--parent RAE-123` to list only sub-issues of a specific issue
+- **Filter by hierarchy**: `--has-parent` for sub-issues only, `--no-parent` for top-level issues only
+- **Enhanced display**: Parent issue shown in list/search outputs and issue details
+
+### Advanced Label Filtering
+- **OR semantics**: `--label-any "bug,urgent"` matches issues with any of these labels
+- **Exclusion**: `--label-not "wontfix,duplicate"` excludes issues with these labels
+- **Unlabeled issues**: `--unlabeled` finds issues without any labels
+- **Incremental updates**: `--add-label` and `--remove-label` for modifying labels without replacing
+
+### Project Management
+- **Milestones**: Create, list, update, and delete project milestones with target dates
+- **Project Updates**: Post progress updates with health status tracking (onTrack, atRisk, offTrack)
+- **Project Creation**: Full project lifecycle with `create`, `update`, and `archive` commands
+- **Issue-Project Assignment**: Assign issues to projects via `--project` flag
+
+### Project & Label Filters in Search
+- **Filter by project**: `linctl issue list --project PROJECT-UUID`
+- **Combined filters**: `linctl issue search "query" --project UUID --label "bug"`
+
 ## 🛠️ Installation
 
 ### Homebrew (macOS/Linux)
@@ -203,7 +230,7 @@ linctl project update PROJECT-UUID --description "Updated description"
 linctl project archive PROJECT-UUID
 ```
 
-## 📢 Project Updates (NEW)
+## 📢 Project Updates
 ```bash
 # Create project update posts for progress tracking
 linctl project update-post create PROJECT-UUID --body "Weekly progress update..."
@@ -384,7 +411,7 @@ linctl project show <project-id>  # Alias
 linctl project create [flags]
 ```
 
-### Milestone Management (NEW)
+### Milestone Management
 ```bash
 # List all milestones for a project
 linctl milestone list PROJECT-UUID
@@ -402,7 +429,7 @@ linctl milestone update PROJECT-UUID MILESTONE-ID --name "Updated Name" --target
 linctl milestone delete PROJECT-UUID MILESTONE-ID
 ```
 
-### Project Update Commands (NEW)
+### Project Update Commands
 ```bash
 # Create project update post
 linctl project update-post create PROJECT-UUID --body "Progress update..."
@@ -919,7 +946,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 🎨 Advanced Features
 
-### 🔍 Enhanced Search (NEW)
+### 🔍 Enhanced Search
 ```bash
 # Full-text search using Linear's search API
 linctl issue search "login bug" --team ENG
@@ -935,7 +962,7 @@ linctl issue search "query" [flags]
 # -c, --include-completed   Include completed and canceled issues
 ```
 
-### 🏷️ Smart Label Management (NEW)
+### 🏷️ Smart Label Management
 ```bash
 # Intelligent label operations with fuzzy matching
 linctl issue update LIN-123 --label "bug,urgnet"  # Typo automatically suggested
