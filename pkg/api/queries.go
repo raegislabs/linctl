@@ -916,8 +916,8 @@ func (c *Client) GetProjects(ctx context.Context, filter map[string]interface{},
 				nodes {
 					id
 					name
-					description
-					state
+						description
+						state
 					priority
 					progress
 					startDate
@@ -976,11 +976,11 @@ func (c *Client) GetProject(ctx context.Context, id string) (*Project, error) {
 	query := `
 		query Project($id: String!) {
 			project(id: $id) {
-				id
-				slugId
-				name
-				description
-				content
+					id
+					slugId
+					name
+					description
+					content
 				state
 				priority
 				progress
@@ -1612,21 +1612,21 @@ func (c *Client) CreateComment(ctx context.Context, issueID string, body string)
 // CreateProject creates a new project
 func (c *Client) CreateProject(ctx context.Context, input map[string]interface{}) (*Project, error) {
 	query := `
-		mutation CreateProject($input: ProjectCreateInput!) {
-			projectCreate(input: $input) {
-				success
-				project {
-					id
-					name
-					description
-					state
-					progress
-					startDate
-					targetDate
-					url
-					icon
-					color
-					createdAt
+			mutation CreateProject($input: ProjectCreateInput!) {
+				projectCreate(input: $input) {
+					success
+					project {
+						id
+						name
+						description
+						state
+						progress
+						startDate
+						targetDate
+						url
+						icon
+						color
+						createdAt
 					updatedAt
 					lead {
 						id
@@ -1721,8 +1721,8 @@ func (c *Client) UpdateProject(ctx context.Context, id string, input map[string]
 				project {
 					id
 					name
-					description
-					state
+						description
+						state
 					priority
 					progress
 					startDate

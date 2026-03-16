@@ -7,11 +7,11 @@ import (
 	"strings"
 	"time"
 
-"github.com/raegislabs/linctl/pkg/api"
+	"github.com/fatih/color"
+	"github.com/raegislabs/linctl/pkg/api"
 	"github.com/raegislabs/linctl/pkg/auth"
 	"github.com/raegislabs/linctl/pkg/output"
 	"github.com/raegislabs/linctl/pkg/utils"
-	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -1061,7 +1061,7 @@ Examples:
 
   # Update multiple fields
   linctl project update abc-123 --state started --priority 2
-  linctl project update abc-123 --description "Full description" --summary "Short summary"
+  linctl project update abc-123 --description "Full description"
 
   # Update with labels
   linctl project update abc-123 --label "urgent,backend"`,
@@ -1097,10 +1097,6 @@ Examples:
 		if cmd.Flags().Changed("description") {
 			description, _ := cmd.Flags().GetString("description")
 			input["description"] = description
-		}
-		if cmd.Flags().Changed("summary") {
-			summary, _ := cmd.Flags().GetString("summary")
-			input["shortSummary"] = summary
 		}
 		if cmd.Flags().Changed("state") {
 			state, _ := cmd.Flags().GetString("state")
@@ -1538,7 +1534,6 @@ func init() {
 	// Update command flags
 	projectUpdateCmd.Flags().String("name", "", "Project name")
 	projectUpdateCmd.Flags().String("description", "", "Project description")
-	projectUpdateCmd.Flags().String("summary", "", "Project short summary")
 	projectUpdateCmd.Flags().String("state", "", "Project state (planned|started|paused|completed|canceled)")
 	projectUpdateCmd.Flags().Int("priority", 0, "Priority (0-4: None, Urgent, High, Normal, Low)")
 	projectUpdateCmd.Flags().String("start-date", "", "Start date (YYYY-MM-DD)")
